@@ -15,7 +15,7 @@ public class RegexTest {
 	@Test
 	public void encontraDadosDoInicioDaPartida(){
 
-		Pattern p = Pattern.compile(TipoLinha.INICIO_PARTIDA.getRegex(), Pattern.CASE_INSENSITIVE);
+		Pattern p = TipoLinha.INICIO_PARTIDA.getPattern();
 		Matcher m = p.matcher("23/04/2013 15:34:22 - New match 11348965 has started");
 		if(m.find()) {
 			String dataInicioPartida = m.group(1);
@@ -38,7 +38,7 @@ public class RegexTest {
 	@Test
 	public void encontraDadosJogadorMatandoJogador(){
 
-		Pattern p = Pattern.compile(TipoLinha.JOGADOR_MATA_JOGADOR.getRegex(), Pattern.CASE_INSENSITIVE);
+		Pattern p = TipoLinha.JOGADOR_MATA_JOGADOR.getPattern();
 		Matcher m = p.matcher("23/04/2013 15:36:04 - Roman killed Nick using M16");
 		if(m.find()) {
 			String dataInicioPartida = m.group(1);
@@ -65,7 +65,7 @@ public class RegexTest {
 	@Test
 	public void encontraDadosMundoMataJogador(){
 
-		Pattern p = Pattern.compile(TipoLinha.MUNDO_MATA_JOGADOR.getRegex(), Pattern.CASE_INSENSITIVE);
+		Pattern p = TipoLinha.MUNDO_MATA_JOGADOR.getPattern();
 		Matcher m = p.matcher("23/04/2013 15:36:33 - <WORLD> killed Nick by DROWN");
 		if(m.find()) {
 			String dataInicioPartida = m.group(1);
@@ -92,7 +92,7 @@ public class RegexTest {
 	@Test
 	public void encontraDadosDoFimDaPartida(){
 
-		Pattern p = Pattern.compile(TipoLinha.FIM_PARTIDA.getRegex(), Pattern.CASE_INSENSITIVE);
+		Pattern p = TipoLinha.FIM_PARTIDA.getPattern();
 		Matcher m = p.matcher("23/04/2013 15:39:22 - Match 11348965 has ended");
 		if(m.find()) {
 			String dataFimPartida = m.group(1);

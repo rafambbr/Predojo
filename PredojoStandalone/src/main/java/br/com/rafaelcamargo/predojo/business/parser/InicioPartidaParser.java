@@ -1,23 +1,15 @@
 package br.com.rafaelcamargo.predojo.business.parser;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import lombok.extern.slf4j.Slf4j;
-import br.com.rafaelcamargo.predojo.business.Parser;
 import br.com.rafaelcamargo.predojo.domain.Partida;
 import br.com.rafaelcamargo.predojo.domain.TipoLinha;
 
 @Slf4j
-public class InicioPartidaParser implements Parser<Partida> {
-
-	private final SimpleDateFormat simpleDateFormat;
-	
-	public InicioPartidaParser(){
-		this.simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-	}
+public class InicioPartidaParser extends Parser<Partida> {
 	
 	@Override
 	public Partida parse(String linha, Partida partidaAtual) {
@@ -25,7 +17,7 @@ public class InicioPartidaParser implements Parser<Partida> {
 		Partida partida = null;
 		
 		try{
-			Pattern p = Pattern.compile(TipoLinha.INICIO_PARTIDA.getRegex(), Pattern.CASE_INSENSITIVE);
+			Pattern p = TipoLinha.INICIO_PARTIDA.getPattern();
 			Matcher m = p.matcher(linha);
 			if(m.find()) {
 				Date dataInicioPartida = this.simpleDateFormat.parse( m.group(1) );
@@ -37,9 +29,7 @@ public class InicioPartidaParser implements Parser<Partida> {
 				partida = new Partida(idPartida, dataInicioPartida);
 			}
 		}catch(Exception e){
-			String erroMsg = "Linha inválida";
-			System.out.println(erroMsg);
-			log.warn(erroMsg, e);
+			log.warn(LINHA_INVALIDA);
 		}
 		
 		return partida;

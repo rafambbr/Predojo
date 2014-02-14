@@ -1,31 +1,25 @@
 package br.com.rafaelcamargo.predojo.business.parser;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import br.com.rafaelcamargo.predojo.business.Parser;
+import lombok.extern.slf4j.Slf4j;
 import br.com.rafaelcamargo.predojo.domain.Arma;
 import br.com.rafaelcamargo.predojo.domain.Assassinato;
 import br.com.rafaelcamargo.predojo.domain.Jogador;
 import br.com.rafaelcamargo.predojo.domain.Partida;
 import br.com.rafaelcamargo.predojo.domain.TipoLinha;
 
-public class JogadorMataJogadorParser implements Parser<Assassinato> {
-
-	private final SimpleDateFormat simpleDateFormat;
-	
-	public JogadorMataJogadorParser(){
-		this.simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-	}
+@Slf4j
+public class JogadorMataJogadorParser extends Parser<Assassinato> {
 	
 	@Override
 	public Assassinato parse(String linha, Partida partidaAtual) {
 		
 		Assassinato assasinato = null;
 		try{
-			Pattern p = Pattern.compile(TipoLinha.JOGADOR_MATA_JOGADOR.getRegex(), Pattern.CASE_INSENSITIVE);
+			Pattern p = TipoLinha.JOGADOR_MATA_JOGADOR.getPattern();
 			Matcher m = p.matcher(linha);
 			if( m.find() ) {
 				Date data = this.simpleDateFormat.parse( m.group(1) );
@@ -39,8 +33,7 @@ public class JogadorMataJogadorParser implements Parser<Assassinato> {
 				assasinato = new Assassinato(data, jogadorAssasino, jogadorMorto, armaAssasino);
 			}
 		}catch(Exception e){
-			String erroMsg = "Linha inválida";
-			System.out.println(erroMsg);
+			log.warn(LINHA_INVALIDA);
 		}
 		
 		return assasinato;

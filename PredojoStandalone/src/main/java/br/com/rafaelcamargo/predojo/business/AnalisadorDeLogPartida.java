@@ -8,14 +8,17 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import lombok.extern.slf4j.Slf4j;
 import br.com.rafaelcamargo.predojo.business.parser.LogParser;
+import br.com.rafaelcamargo.predojo.business.parser.Parser;
 import br.com.rafaelcamargo.predojo.common.CommonDomain;
 import br.com.rafaelcamargo.predojo.domain.Assassinato;
 import br.com.rafaelcamargo.predojo.domain.Partida;
 import br.com.rafaelcamargo.predojo.domain.TipoLinha;
+import br.com.rafaelcamargo.predojo.exception.BusinessException;
 
+@Slf4j
 public class AnalisadorDeLogPartida {
 
 	private final File arquivo;
@@ -33,14 +36,22 @@ public class AnalisadorDeLogPartida {
 	}
 	
 	private final void processaLinhaALinha() throws IOException {
-		Scanner scanner = new Scanner(this.arquivo, ENCODING.name());
 		
-		Partida partidaAtual = null;
-		while (scanner.hasNextLine()) {
-			partidaAtual = processaLinha(scanner.nextLine(), partidaAtual);
-			this.partidas.add(partidaAtual);
+		Scanner scanner = new Scanner(this.arquivo, ENCODING.name());	
+		
+		try{
+			Partida partidaAtual = null;
+			while (scanner.hasNextLine()) {
+				partidaAtual = processaLinha(scanner.nextLine(), partidaAtual);
+				this.partidas.add(partidaAtual);
+			}
+		}catch(Exception e){
+			String erroMsg = "Nao foi possivel procesar as linhas do arquivo.";
+			log.error(erroMsg, e);
+			throw new BusinessException(erroMsg);
+		}finally{
+			scanner.close();
 		}
-		scanner.close();
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -63,17 +74,13 @@ public class AnalisadorDeLogPartida {
 	}
 
 	private TipoLinha getTipoDaLinha(String linha) {
-		
-		TipoLinha tipoLinhaIdentificada = null;
 		for (TipoLinha tipoLinha : TipoLinha.values()) {
-			Pattern pattern = Pattern.compile( tipoLinha.getRegex() );
-			Matcher matcher = pattern.matcher(linha);
-			
+			Matcher matcher = tipoLinha.getPattern().matcher(linha);
 			if(matcher.matches()){
-				tipoLinhaIdentificada = tipoLinha;
+				return tipoLinha;
 			}
 		}
 		
-		return tipoLinhaIdentificada;
+		return null;
 	}
 }

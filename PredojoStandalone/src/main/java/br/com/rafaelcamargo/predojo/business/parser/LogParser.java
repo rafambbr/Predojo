@@ -3,7 +3,6 @@ package br.com.rafaelcamargo.predojo.business.parser;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.rafaelcamargo.predojo.business.Parser;
 import br.com.rafaelcamargo.predojo.domain.TipoLinha;
 
 /**

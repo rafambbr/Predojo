@@ -13,6 +13,7 @@ import br.com.rafaelcamargo.predojo.business.GeraEstatisticaPartidas;
 import br.com.rafaelcamargo.predojo.business.ImprimeEstatisticaPartida;
 import br.com.rafaelcamargo.predojo.domain.EstatisticaPartida;
 import br.com.rafaelcamargo.predojo.domain.Partida;
+import br.com.rafaelcamargo.predojo.exception.BusinessException;
 
 @Slf4j
 public class App {
@@ -36,8 +37,14 @@ public class App {
 	        } 
 	        
 	        System.out.println("Aplicação finalizada com sucesso");
-		} catch (IOException e) {
-			log.error(e.getMessage());
+		} catch(BusinessException e){
+			String erroMsg = e.getMessage();
+			log.error(erroMsg, e);
+			System.out.println("Erro: " + erroMsg);
+		} catch (Exception e) {
+			String erroMsg = e.getMessage();
+			log.error(erroMsg, e);
+			System.out.println("Erro inesperado ao processar o arquivo");
 		}
 	}
 
