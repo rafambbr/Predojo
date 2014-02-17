@@ -22,7 +22,7 @@ mvn exec:java -Dexec.mainClass="br.com.rafaelcamargo.predojo.application.App"
 
 *************************************************************************************************************************
 * EXECUTANDO OS TESTES
-* Para os testes foi tulizado JUnit e Hamcrest, para executar todos os testes deve se executar o comando abaixo, o resultado
+* Para os testes foi tulizado JUnit, Hamcrest e Mockito para executar todos os testes deve se executar o comando abaixo, o resultado
 * da execução dos testes fica na pasta "%PROJETO%"/target/site/
 *************************************************************************************************************************
 mvn surefire-report:report
