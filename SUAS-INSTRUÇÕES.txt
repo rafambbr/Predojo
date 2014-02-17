@@ -4,7 +4,7 @@
 * dar dois cliques no "lombok.jar" selecionar a pasta onde a IDE esta instalada e clicar em "install/update".
 * Essa bliblioteca nos permite escrver um codigo Java menos verboso.
 *
-* Optei por utilizar a menor quantidade de frameworks possiveis na aplicacao com o objetivo de focar apenas em cogigo java
+* Optei por utilizar a menor quantidade de frameworks possiveis na aplicacao com o objetivo de focar apenas em codigo java
 * e tornar uma futura adaptacao do codigo mais simples dependendo do contexto que a aplicacao for rodada
 *
 *************************************************************************************************************************
@@ -12,7 +12,7 @@
 
 *************************************************************************************************************************
 * EXECUTANDO A APLICACAO:
-* Para rodar o projeto deve se executar o comando abaixo, onde sera exibido um menu da aplicacao com os seguintes comandos:
+* Para rodar o projeto deve se executar o comando do Maven abaixo, onde sera exibido um menu da aplicacao com os seguintes comandos:
 * "sair"    - sai da aplicacao
 * "ajuda"   - imprime menu de comandos
 * %ARQUIVO% - Deve ser informado o caminho completo do arquivo de log a ser analisado ex: "C:/minha/pasta/meu_arquivo_partida.log"
@@ -23,7 +23,7 @@ mvn exec:java -Dexec.mainClass="br.com.rafaelcamargo.predojo.application.App"
 *************************************************************************************************************************
 * EXECUTANDO OS TESTES
 * Para os testes foi tulizado JUnit e Hamcrest, para executar todos os testes deve se executar o comando abaixo, o resultado
-* da execução dos testes fica na pasta "%PROJETO%"/target/site/
+* da execucao dos testes fica na pasta "%PROJETO%"/target/site/
 *************************************************************************************************************************
 mvn surefire-report:report
 mvn verify
