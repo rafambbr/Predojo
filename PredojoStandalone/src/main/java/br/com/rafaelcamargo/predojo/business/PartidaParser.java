@@ -4,33 +4,43 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import lombok.extern.slf4j.Slf4j;
-import br.com.rafaelcamargo.predojo.domain.Assassinato;
-import br.com.rafaelcamargo.predojo.domain.EstatisticaPartida;
 import br.com.rafaelcamargo.predojo.domain.Partida;
 import br.com.rafaelcamargo.predojo.exception.BusinessException;
 
 @Slf4j
-public class GeraEstatisticaPartidas {
+public class PartidaParser {
 
-	public Collection<EstatisticaPartida> gerarEstatisticas(Collection<Partida> partidas){
+	public Collection<EstatisticaPartida> parse(Collection<Partida> partidas){
 		Collection<EstatisticaPartida> estatisticaPartidas = new HashSet<EstatisticaPartida>();
-		
 		try{
+			
 			for (Partida partida : partidas) {
-				EstatisticaPartida estatisticaPartida = new EstatisticaPartida(partida);
-				for (Assassinato assassinato : partida.getAssassinatos()) {
-					estatisticaPartida.adicionarAssassinatoAPartida(assassinato);
-				}
-				
-				estatisticaPartida.finalizaPartida();
+				EstatisticaPartida estatisticaPartida = parse(partida);
 				estatisticaPartidas.add(estatisticaPartida);
 			}
+			
 		}catch(Exception e){
-			String erroMsg = "Nao foi possivel gerar as estatisticas.";
+			String erroMsg = "Nao foi possível gerar as estatistícas.";
 			log.error(erroMsg, e);
 			throw new BusinessException(erroMsg);
 		}
 		
 		return estatisticaPartidas;
 	}
+	
+	public EstatisticaPartida parse(Partida partida){
+		EstatisticaPartida estatisticaPartida = null;
+		try{
+			
+			estatisticaPartida = new EstatisticaPartida(partida);
+			
+		}catch(Exception e){
+			String erroMsg = "Nao foi possível gerar a estatística.";
+			log.error(erroMsg, e);
+			throw new BusinessException(erroMsg);
+		}
+		
+		return estatisticaPartida;
+	}
+	
 }

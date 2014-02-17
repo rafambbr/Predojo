@@ -1,12 +1,12 @@
 package br.com.rafaelcamargo.predojo.domain;
 
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
-import br.com.rafaelcamargo.predojo.common.CommonDomain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import br.com.rafaelcamargo.predojo.common.CommonDomain;
 
 @EqualsAndHashCode(of={"idPartida"}, callSuper=false)
 public @Data class Partida implements CommonDomain{
@@ -15,7 +15,7 @@ public @Data class Partida implements CommonDomain{
 	private Long idPartida;
 	private Date dataInicio;
 	private Date dataFim;
-	private Set<Assassinato> assassinatos = new HashSet<Assassinato>();
+	private Set<Assassinato> assassinatos = new LinkedHashSet<Assassinato>();
 	
 	public Partida(Long idPartida, Date dataInicio){
 		this.idPartida = idPartida;
@@ -24,6 +24,12 @@ public @Data class Partida implements CommonDomain{
 	
 	public Partida(Long idPartida){
 		this.idPartida = idPartida;
+	}
+
+	public Partida(Long idPartida, Date dataInicio, Date dataFim) {
+		this.idPartida = idPartida;
+		this.dataInicio = dataInicio;
+		this.dataFim = dataFim;
 	}
 
 	public StatusPartida getStatusPartida(){

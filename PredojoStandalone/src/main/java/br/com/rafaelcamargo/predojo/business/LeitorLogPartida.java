@@ -19,32 +19,29 @@ import br.com.rafaelcamargo.predojo.domain.TipoLinha;
 import br.com.rafaelcamargo.predojo.exception.BusinessException;
 
 @Slf4j
-public class AnalisadorDeLogPartida {
+public class LeitorLogPartida extends LeitorLog<Partida>{
 
 	private final File arquivo;
 	private final static Charset ENCODING = StandardCharsets.UTF_8; 
-	
-	private final Set<Partida> partidas = new HashSet<Partida>();
 
-	public AnalisadorDeLogPartida(File arquivo){
+	public LeitorLogPartida(File arquivo){
 		this.arquivo = arquivo;
 	}
 	
-	public Set<Partida> getPartidas() throws IOException{
-		processaLinhaALinha();
-		return this.partidas;
-	}
-	
-	private final void processaLinhaALinha() throws IOException {
+	public final Set<Partida> processaLog() throws IOException {
 		
-		Scanner scanner = new Scanner(this.arquivo, ENCODING.name());	
+		final Set<Partida> partidas = new HashSet<Partida>();
+		Scanner scanner = null;	
+		Partida partidaAtual = null;
 		
 		try{
-			Partida partidaAtual = null;
+			
+			scanner = new Scanner(this.arquivo, ENCODING.name());
 			while (scanner.hasNextLine()) {
 				partidaAtual = processaLinha(scanner.nextLine(), partidaAtual);
-				this.partidas.add(partidaAtual);
+				partidas.add(partidaAtual);
 			}
+			
 		}catch(Exception e){
 			String erroMsg = "Nao foi possivel procesar as linhas do arquivo.";
 			log.error(erroMsg, e);
@@ -52,6 +49,8 @@ public class AnalisadorDeLogPartida {
 		}finally{
 			scanner.close();
 		}
+		
+		return partidas;
 	}
 
 	@SuppressWarnings("rawtypes")

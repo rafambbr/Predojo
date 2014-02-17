@@ -22,9 +22,9 @@ public class AnalisadorDeLogPartidaTest {
 			
 			URL resource = getClass().getResource("/partida_jogo_02.log");
 			File logFile = new File(resource.getFile());
-			AnalisadorDeLogPartida analisadorDeLogPartida = new AnalisadorDeLogPartida(logFile);
+			LeitorLogPartida analisadorDeLogPartida = new LeitorLogPartida(logFile);
 			
-			Set<Partida> partidas = analisadorDeLogPartida.getPartidas();
+			Set<Partida> partidas = analisadorDeLogPartida.processaLog();
 			
 			Partida partida01 = new Partida(11348965L);
 			Partida partida02 = new Partida(78348965L);
@@ -44,9 +44,9 @@ public class AnalisadorDeLogPartidaTest {
 			
 			URL resource = getClass().getResource("/partida_jogo.log");
 			File logFile = new File(resource.getFile());
-			AnalisadorDeLogPartida analisadorDeLogPartida = new AnalisadorDeLogPartida(logFile);
+			LeitorLog<Partida> analisadorDeLogPartida = new LeitorLogPartida(logFile);
 			
-			Set<Partida> partidas = analisadorDeLogPartida.getPartidas();
+			Set<Partida> partidas = analisadorDeLogPartida.processaLog();
 			
 			Partida partida01 = new Partida(11348965L);
 			

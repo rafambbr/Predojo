@@ -3,7 +3,6 @@ package br.com.rafaelcamargo.predojo.business;
 import java.util.Collection;
 
 import br.com.rafaelcamargo.predojo.domain.Arma;
-import br.com.rafaelcamargo.predojo.domain.EstatisticaPartida;
 import br.com.rafaelcamargo.predojo.domain.HistoricoSequenciaAssassinatosConsecutivos;
 import br.com.rafaelcamargo.predojo.domain.Jogador;
 

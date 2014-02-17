@@ -8,27 +8,28 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
 import org.junit.Test;
 
-import br.com.rafaelcamargo.predojo.domain.EstatisticaPartida;
 import br.com.rafaelcamargo.predojo.domain.Partida;
+import br.com.rafaelcamargo.predojo.exception.BusinessException;
 
-public class GeraEstatisticaPartidasTest {
+public class PartidaParserTest {
 
 	@Test
 	public void deveGerarEstatisticaDeDuasPartidas(){
 		try {
 			URL resource = getClass().getResource("/partida_jogo_02.log");
 			File logFile = new File(resource.getFile());
-			AnalisadorDeLogPartida analisadorDeLogPartida = new AnalisadorDeLogPartida(logFile);
+			LeitorLog<Partida> analisadorDeLogPartida = new LeitorLogPartida(logFile);
 		
-			Set<Partida> partidas = analisadorDeLogPartida.getPartidas();
+			Set<Partida> partidas = analisadorDeLogPartida.processaLog();
 			
-			GeraEstatisticaPartidas geraEstatisticaPartidas = new GeraEstatisticaPartidas();
-			Collection<EstatisticaPartida> estatisticasPartidas = geraEstatisticaPartidas.gerarEstatisticas(partidas);
+			PartidaParser geraEstatisticaPartidas = new PartidaParser();
+			Collection<EstatisticaPartida> estatisticasPartidas = geraEstatisticaPartidas.parse(partidas);
 			
 			Partida partida01 = new Partida(11348965L);
 			Partida partida02 = new Partida(78348965L);
@@ -47,12 +48,12 @@ public class GeraEstatisticaPartidasTest {
 		try {
 			URL resource = getClass().getResource("/partida_jogo.log");
 			File logFile = new File(resource.getFile());
-			AnalisadorDeLogPartida analisadorDeLogPartida = new AnalisadorDeLogPartida(logFile);
+			LeitorLog<Partida> analisadorDeLogPartida = new LeitorLogPartida(logFile);
 		
-			Set<Partida> partidas = analisadorDeLogPartida.getPartidas();
+			Set<Partida> partidas = analisadorDeLogPartida.processaLog();
 			
-			GeraEstatisticaPartidas geraEstatisticaPartidas = new GeraEstatisticaPartidas();
-			Collection<EstatisticaPartida> estatisticasPartidas = geraEstatisticaPartidas.gerarEstatisticas(partidas);
+			PartidaParser geraEstatisticaPartidas = new PartidaParser();
+			Collection<EstatisticaPartida> estatisticasPartidas = geraEstatisticaPartidas.parse(partidas);
 			
 			Partida partida01 = new Partida(11348965L);
 			
@@ -63,4 +64,23 @@ public class GeraEstatisticaPartidasTest {
 			fail();
 		}
 	}
+	
+	@Test(expected=BusinessException.class)
+	public void deveRetornarBusinessExceptionComAPartidaNula(){
+		
+		Partida partida = null;
+		new PartidaParser().parse(partida);
+		
+	}
+	
+	@Test(expected=BusinessException.class)
+	public void deveRetornarBusinessExceptionComAListadePartidasContendoUmaPartidaNula(){
+		
+		Collection<Partida> partidas = new ArrayList<Partida>();
+		partidas.add(null);
+		
+		new PartidaParser().parse(partidas);
+		
+	}
+
 }

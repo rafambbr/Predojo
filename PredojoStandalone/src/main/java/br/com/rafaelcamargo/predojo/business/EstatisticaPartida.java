@@ -1,7 +1,8 @@
-package br.com.rafaelcamargo.predojo.domain;
+package br.com.rafaelcamargo.predojo.business;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,7 +15,12 @@ import org.joda.time.DateTime;
 import org.joda.time.Seconds;
 
 import lombok.EqualsAndHashCode;
-import br.com.rafaelcamargo.predojo.business.AssassinatoComparator;
+import br.com.rafaelcamargo.predojo.business.comparator.AssassinatoComparator;
+import br.com.rafaelcamargo.predojo.domain.Arma;
+import br.com.rafaelcamargo.predojo.domain.Assassinato;
+import br.com.rafaelcamargo.predojo.domain.HistoricoSequenciaAssassinatosConsecutivos;
+import br.com.rafaelcamargo.predojo.domain.Jogador;
+import br.com.rafaelcamargo.predojo.domain.Partida;
 
 @EqualsAndHashCode(of={"partida"}, callSuper=false)
 public class EstatisticaPartida {
@@ -37,16 +43,42 @@ public class EstatisticaPartida {
 	
 	public EstatisticaPartida(Partida partida){
 		this.partida = partida;
+		adicionarAssassinatoAPartida(partida.getAssassinatos());
+		analisarPartida();
+	}
+	
+	private void analisarPartida(){
+		verificaJogadorQueNaoMorreuNaPartida();
+		verificaOGanhadorComMelhorDesempenho();
+		daPremioAosJogadoresQueNaoMorreramNaPartida();
 	}
 
-	public void adicionarAssassinatoAPartida(Assassinato assassinato){
-		adicionarJogadoresDaPartida(assassinato);
-		adicionaAssassinatoAoJogador(assassinato);
-		adicionaMorteAoJogador(assassinato);
-		
-		adicionaHistoricoDeAssassinatoPorJogador(assassinato);
-		verificaSeMatouMaisDeCincoJogadoresEmUmMinuto( assassinato );
-		atualizaJogadorComMaiorNumeroDeAssassinatosSemMorrer( assassinato );
+	private void adicionarAssassinatoAPartida(Collection<Assassinato> assassinatos){
+		for (Assassinato assassinato : assassinatos) {
+			adicionarAssassinatoAPartida(assassinato);
+		}
+	}
+	
+	private void adicionarAssassinatoAPartida(Assassinato assassinato){
+		if( dadosValidos(assassinato) ){
+			adicionarJogadoresDaPartida(assassinato);
+			adicionaAssassinatoAoJogador(assassinato);
+			adicionaMorteAoJogador(assassinato);
+			
+			adicionaHistoricoDeAssassinatoPorJogador(assassinato);
+			verificaSeMatouMaisDeCincoJogadoresEmUmMinuto( assassinato );
+			atualizaJogadorComMaiorNumeroDeAssassinatosSemMorrer( assassinato );
+		}
+	}
+
+	private boolean dadosValidos(Assassinato assassinato) {
+		Jogador assassino = assassinato.getAssassino();
+		Jogador morto = assassinato.getMorto();
+		Arma armaAssassino = assassinato.getArmaAssassino();
+		Date dataAssassinato = assassinato.getData();
+
+		return !(assassino == null || morto == null || armaAssassino == null || dataAssassinato  == null || 
+				"<WORLD>".equals(assassino.getNome()) || "DROWN".equals(armaAssassino.getNome()) );
 	}
 
 	private void daPremioAosJogadoresQueNaoMorreramNaPartida() {
@@ -145,6 +177,7 @@ public class EstatisticaPartida {
 		for (Jogador jogador : jogadoresEQuantidadeDeAssassinatos.keySet()) {
 			Integer quantidadeAssassinatosJogador = jogadoresEQuantidadeDeAssassinatos.get(jogador);
 			if(quantidadeMaximaDeAssassinatosPartida < quantidadeAssassinatosJogador){
+				quantidadeMaximaDeAssassinatosPartida = quantidadeAssassinatosJogador;
 				vencedores.clear();
 				vencedores.add(jogador);
 			}else if(quantidadeMaximaDeAssassinatosPartida == quantidadeAssassinatosJogador){
@@ -223,12 +256,6 @@ public class EstatisticaPartida {
 		}
 		
 		return new HistoricoSequenciaAssassinatosConsecutivos(jogadorComMaiorSequencia, sequenciaMaximaPartida);
-	}
-	
-	public void finalizaPartida(){
-		verificaJogadorQueNaoMorreuNaPartida();
-		verificaOGanhadorComMelhorDesempenho();
-		daPremioAosJogadoresQueNaoMorreramNaPartida();
 	}
 	
 	public int getQuantidadeAssassinatos(Jogador jogador){
