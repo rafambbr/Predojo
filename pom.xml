@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<groupId>br.com.rafaelcamargo.predojo</groupId>
+	<artifactId>parent-project</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Predojo Parent</name>
+	<description>Predojo  Amil</description>
+	
+	<!-- Variaveis -->
+	<properties>
+		<java.version>1.7</java.version>
+		<encoding>ISO-8859-1</encoding>
+   		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+  	</properties>
+
+	<!-- Projetos -->
+  	<modules>
+		<module>/PredojoStandalone</module>
+  	</modules>
+
+	<build>
+		<plugins>
+			<!-- Configura Versão do Java -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			
+			<!-- Configura Encoding -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+				</configuration>
+		  	</plugin>
+			
+		</plugins>
+	</build>
+
+</project>
