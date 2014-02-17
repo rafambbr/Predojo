@@ -1,4 +1,4 @@
-package br.com.rafaelcamargo.predojo.business;
+package br.com.rafaelcamargo.predojo.business.impl;
 
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
@@ -11,10 +11,12 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import br.com.rafaelcamargo.predojo.business.LeitorLog;
+import br.com.rafaelcamargo.predojo.business.impl.LeitorLogPartidaImpl;
 import br.com.rafaelcamargo.predojo.domain.Partida;
 
 
-public class AnalisadorDeLogPartidaTest {
+public class LeitorLogPartidaImplTest {
 
 	@Test
 	public void analisaArquivoComDuasPartidas(){
@@ -22,9 +24,9 @@ public class AnalisadorDeLogPartidaTest {
 			
 			URL resource = getClass().getResource("/partida_jogo_02.log");
 			File logFile = new File(resource.getFile());
-			LeitorLogPartida analisadorDeLogPartida = new LeitorLogPartida(logFile);
+			LeitorLog<Partida> leitorLog = new LeitorLogPartidaImpl(logFile);
 			
-			Set<Partida> partidas = analisadorDeLogPartida.processaLog();
+			Set<Partida> partidas = leitorLog.processaLog();
 			
 			Partida partida01 = new Partida(11348965L);
 			Partida partida02 = new Partida(78348965L);
@@ -44,9 +46,9 @@ public class AnalisadorDeLogPartidaTest {
 			
 			URL resource = getClass().getResource("/partida_jogo.log");
 			File logFile = new File(resource.getFile());
-			LeitorLog<Partida> analisadorDeLogPartida = new LeitorLogPartida(logFile);
+			LeitorLog<Partida> leitorLog = new LeitorLogPartidaImpl(logFile);
 			
-			Set<Partida> partidas = analisadorDeLogPartida.processaLog();
+			Set<Partida> partidas = leitorLog.processaLog();
 			
 			Partida partida01 = new Partida(11348965L);
 			

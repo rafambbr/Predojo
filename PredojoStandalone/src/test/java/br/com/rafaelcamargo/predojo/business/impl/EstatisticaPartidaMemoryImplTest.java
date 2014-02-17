@@ -1,4 +1,4 @@
-package br.com.rafaelcamargo.predojo.business;
+package br.com.rafaelcamargo.predojo.business.impl;
 
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
@@ -10,11 +10,14 @@ import java.util.Set;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.com.rafaelcamargo.predojo.business.EstatisticaPartida;
+import br.com.rafaelcamargo.predojo.business.PartidaBuilder;
+import br.com.rafaelcamargo.predojo.business.impl.EstatisticaPartidaMemoryImpl;
 import br.com.rafaelcamargo.predojo.domain.Arma;
 import br.com.rafaelcamargo.predojo.domain.Jogador;
 import br.com.rafaelcamargo.predojo.domain.Partida;
 
-public class EstatisticaPartidaTest {
+public class EstatisticaPartidaMemoryImplTest {
 	
 	//Jogadores
 	private static final Jogador RAFAEL = new Jogador("Rafael");
@@ -46,13 +49,13 @@ public class EstatisticaPartidaTest {
 	@Test
 	public void quemVenceuAPartida(){
 		
-		EstatisticaPartida estatisticaPartida01 = new EstatisticaPartida(PARTIDA01);
+		EstatisticaPartida estatisticaPartida01 = new EstatisticaPartidaMemoryImpl(PARTIDA01);
 		Set<Jogador> vencedoresPartida01 = estatisticaPartida01.getVencedores();
 		
-		EstatisticaPartida estatisticaPartida02 = new EstatisticaPartida(PARTIDA02);
+		EstatisticaPartida estatisticaPartida02 = new EstatisticaPartidaMemoryImpl(PARTIDA02);
 		Set<Jogador> vencedoresPartida02 = estatisticaPartida02.getVencedores();
 		
-		EstatisticaPartida estatisticaPartida03 = new EstatisticaPartida(PARTIDA03);
+		EstatisticaPartida estatisticaPartida03 = new EstatisticaPartidaMemoryImpl(PARTIDA03);
 		Set<Jogador> vencedoresPartida03 = estatisticaPartida03.getVencedores();
 		
 		assertEquals(1, vencedoresPartida01.size());

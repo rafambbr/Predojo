@@ -8,11 +8,13 @@ import java.util.Collection;
 import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
-import br.com.rafaelcamargo.predojo.business.LeitorLog;
-import br.com.rafaelcamargo.predojo.business.LeitorLogPartida;
 import br.com.rafaelcamargo.predojo.business.EstatisticaPartida;
-import br.com.rafaelcamargo.predojo.business.PartidaParser;
-import br.com.rafaelcamargo.predojo.business.ImprimeEstatisticaPartida;
+import br.com.rafaelcamargo.predojo.business.ImprimeDados;
+import br.com.rafaelcamargo.predojo.business.LeitorLog;
+import br.com.rafaelcamargo.predojo.business.LogParser;
+import br.com.rafaelcamargo.predojo.business.impl.ImprimeEstatisticaPartidaConsoleImpl;
+import br.com.rafaelcamargo.predojo.business.impl.LeitorLogPartidaImpl;
+import br.com.rafaelcamargo.predojo.business.impl.PartidaParserImpl;
 import br.com.rafaelcamargo.predojo.domain.Partida;
 import br.com.rafaelcamargo.predojo.exception.BusinessException;
 
@@ -61,13 +63,13 @@ public class App {
 		File logFile = new File(caminhoArquivo);
 		if(logFile.isFile()){
 			System.out.println("Lendo arquivo: " + caminhoArquivo);  
-			LeitorLog<Partida> analisadorDeLogPartida = new LeitorLogPartida(logFile);
+			LeitorLog<Partida> analisadorDeLogPartida = new LeitorLogPartidaImpl(logFile);
 			Set<Partida> partidasAnalisadas = analisadorDeLogPartida.processaLog();
 			
-			PartidaParser geraEstatisticaPartidas = new PartidaParser();
+			LogParser<Partida, EstatisticaPartida> geraEstatisticaPartidas = new PartidaParserImpl();
 			Collection<EstatisticaPartida> estatisticasPartidas = geraEstatisticaPartidas.parse(partidasAnalisadas);
 			
-			ImprimeEstatisticaPartida imprimeEstatisticaPartida = new ImprimeEstatisticaPartida();
+			ImprimeDados<EstatisticaPartida> imprimeEstatisticaPartida = new ImprimeEstatisticaPartidaConsoleImpl();
 			imprimeEstatisticaPartida.imprimir(estatisticasPartidas);
 		}else{
 			System.out.println("Arquivo inválido: " + caminhoArquivo); 

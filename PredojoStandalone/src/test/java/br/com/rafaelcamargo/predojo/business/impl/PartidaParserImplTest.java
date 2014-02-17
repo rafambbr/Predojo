@@ -1,4 +1,4 @@
-package br.com.rafaelcamargo.predojo.business;
+package br.com.rafaelcamargo.predojo.business.impl;
 
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
@@ -14,22 +14,27 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import br.com.rafaelcamargo.predojo.business.EstatisticaPartida;
+import br.com.rafaelcamargo.predojo.business.LeitorLog;
+import br.com.rafaelcamargo.predojo.business.LogParser;
+import br.com.rafaelcamargo.predojo.business.impl.LeitorLogPartidaImpl;
+import br.com.rafaelcamargo.predojo.business.impl.PartidaParserImpl;
 import br.com.rafaelcamargo.predojo.domain.Partida;
 import br.com.rafaelcamargo.predojo.exception.BusinessException;
 
-public class PartidaParserTest {
+public class PartidaParserImplTest {
 
 	@Test
 	public void deveGerarEstatisticaDeDuasPartidas(){
 		try {
 			URL resource = getClass().getResource("/partida_jogo_02.log");
 			File logFile = new File(resource.getFile());
-			LeitorLog<Partida> analisadorDeLogPartida = new LeitorLogPartida(logFile);
+			LeitorLog<Partida> analisadorDeLogPartida = new LeitorLogPartidaImpl(logFile);
 		
 			Set<Partida> partidas = analisadorDeLogPartida.processaLog();
 			
-			PartidaParser geraEstatisticaPartidas = new PartidaParser();
-			Collection<EstatisticaPartida> estatisticasPartidas = geraEstatisticaPartidas.parse(partidas);
+			LogParser<Partida, EstatisticaPartida> partidaParser = new PartidaParserImpl();
+			Collection<EstatisticaPartida> estatisticasPartidas = partidaParser.parse(partidas);
 			
 			Partida partida01 = new Partida(11348965L);
 			Partida partida02 = new Partida(78348965L);
@@ -48,12 +53,12 @@ public class PartidaParserTest {
 		try {
 			URL resource = getClass().getResource("/partida_jogo.log");
 			File logFile = new File(resource.getFile());
-			LeitorLog<Partida> analisadorDeLogPartida = new LeitorLogPartida(logFile);
+			LeitorLog<Partida> analisadorDeLogPartida = new LeitorLogPartidaImpl(logFile);
 		
 			Set<Partida> partidas = analisadorDeLogPartida.processaLog();
 			
-			PartidaParser geraEstatisticaPartidas = new PartidaParser();
-			Collection<EstatisticaPartida> estatisticasPartidas = geraEstatisticaPartidas.parse(partidas);
+			LogParser<Partida, EstatisticaPartida> partidaParser = new PartidaParserImpl();
+			Collection<EstatisticaPartida> estatisticasPartidas = partidaParser.parse(partidas);
 			
 			Partida partida01 = new Partida(11348965L);
 			
@@ -69,7 +74,7 @@ public class PartidaParserTest {
 	public void deveRetornarBusinessExceptionComAPartidaNula(){
 		
 		Partida partida = null;
-		new PartidaParser().parse(partida);
+		new PartidaParserImpl().parse(partida);
 		
 	}
 	
@@ -79,7 +84,7 @@ public class PartidaParserTest {
 		Collection<Partida> partidas = new ArrayList<Partida>();
 		partidas.add(null);
 		
-		new PartidaParser().parse(partidas);
+		new PartidaParserImpl().parse(partidas);
 		
 	}
 

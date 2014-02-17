@@ -1,13 +1,16 @@
-package br.com.rafaelcamargo.predojo.business;
+package br.com.rafaelcamargo.predojo.business.impl;
 
 import java.util.Collection;
 
+import br.com.rafaelcamargo.predojo.business.EstatisticaPartida;
+import br.com.rafaelcamargo.predojo.business.ImprimeDados;
 import br.com.rafaelcamargo.predojo.domain.Arma;
 import br.com.rafaelcamargo.predojo.domain.HistoricoSequenciaAssassinatosConsecutivos;
 import br.com.rafaelcamargo.predojo.domain.Jogador;
 
-public class ImprimeEstatisticaPartida {
+public class ImprimeEstatisticaPartidaConsoleImpl implements ImprimeDados<EstatisticaPartida> {
 
+	@Override
 	public void imprimir(Collection<EstatisticaPartida> estatisticasPartidas){
 		if(estatisticasPartidas != null){
 			for (EstatisticaPartida estatisticaPartida : estatisticasPartidas) {
@@ -16,7 +19,7 @@ public class ImprimeEstatisticaPartida {
 		}
 	}
 	
-	public void imprimir(EstatisticaPartida estatisticaPartida){
+	private void imprimir(EstatisticaPartida estatisticaPartida){
 		StringBuffer sb = new StringBuffer("\n\n\n\n\n=========================== PARTIDA:")
 			.append(estatisticaPartida.getIdPartida()).append("==========================");
 		System.out.println( sb.toString() );

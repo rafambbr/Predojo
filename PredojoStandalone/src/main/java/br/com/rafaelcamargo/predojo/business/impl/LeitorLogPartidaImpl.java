@@ -1,4 +1,4 @@
-package br.com.rafaelcamargo.predojo.business;
+package br.com.rafaelcamargo.predojo.business.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 import lombok.extern.slf4j.Slf4j;
+import br.com.rafaelcamargo.predojo.business.LeitorLog;
 import br.com.rafaelcamargo.predojo.business.parser.LogParser;
 import br.com.rafaelcamargo.predojo.business.parser.Parser;
 import br.com.rafaelcamargo.predojo.common.CommonDomain;
@@ -19,12 +20,12 @@ import br.com.rafaelcamargo.predojo.domain.TipoLinha;
 import br.com.rafaelcamargo.predojo.exception.BusinessException;
 
 @Slf4j
-public class LeitorLogPartida extends LeitorLog<Partida>{
+public class LeitorLogPartidaImpl extends LeitorLog<Partida>{
 
 	private final File arquivo;
 	private final static Charset ENCODING = StandardCharsets.UTF_8; 
 
-	public LeitorLogPartida(File arquivo){
+	public LeitorLogPartidaImpl(File arquivo){
 		this.arquivo = arquivo;
 	}
 	
