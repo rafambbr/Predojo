@@ -5,12 +5,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import lombok.extern.slf4j.Slf4j;
+import br.com.rafaelcamargo.predojo.common.LogPartidaCommon;
 import br.com.rafaelcamargo.predojo.domain.Partida;
 import br.com.rafaelcamargo.predojo.domain.TipoLinha;
 
 @Slf4j
-public class InicioPartidaParser extends Parser<Partida> {
-	
+public class InicioPartidaParser extends Parser<Partida> implements LogPartidaCommon{
+
 	@Override
 	public Partida parse(String linha, Partida partidaAtual) {
 		
@@ -20,7 +21,7 @@ public class InicioPartidaParser extends Parser<Partida> {
 			Pattern p = TipoLinha.INICIO_PARTIDA.getPattern();
 			Matcher m = p.matcher(linha);
 			if(m.find()) {
-				Date dataInicioPartida = this.simpleDateFormat.parse( m.group(1) );
+				Date dataInicioPartida = dateAdapter.getData( m.group(1) ); 
 				//String separador = m.group(2);
 				//String informacaoNovaPartida = m.group(3);
 				Long idPartida = Long.parseLong( m.group(4) );

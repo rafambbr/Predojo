@@ -27,4 +27,9 @@ public @Data class Assassinato implements CommonDomain{
 		this.armaAssassino = armaAssassino;
 	}
 	
+	@Override
+	public String toString() {
+		return this.assassino + " matou " + this.morto + " com " + this.armaAssassino ;
+	}
+	
 }

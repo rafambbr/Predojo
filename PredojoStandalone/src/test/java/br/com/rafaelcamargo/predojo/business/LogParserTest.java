@@ -9,7 +9,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -25,10 +24,10 @@ import br.com.rafaelcamargo.predojo.domain.Assassinato;
 import br.com.rafaelcamargo.predojo.domain.HistoricoSequenciaAssassinatosConsecutivos;
 import br.com.rafaelcamargo.predojo.domain.Jogador;
 import br.com.rafaelcamargo.predojo.domain.Partida;
+import br.com.rafaelcamargo.predojo.util.DateAdapter;
 
 public class LogParserTest {
 
-	public final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	private Partida mockPartida;
 	
 	private Jogador rafel = new Jogador("Rafael");
@@ -38,6 +37,8 @@ public class LogParserTest {
 	private Arma m16 = new Arma("M16");
 	private Arma ak47 = new Arma("AK46");
 	private Arma drown = new Arma("DROWN");
+	
+	private DateAdapter dateAdapter;
 	
 	@Before
 	public void setUp(){
@@ -54,6 +55,8 @@ public class LogParserTest {
 		this.m16 = new Arma("M16");
 		this.ak47 = new Arma("AK46");
 		this.drown = new Arma("DROWN");
+		
+		this.dateAdapter = new DateAdapter( DateAdapter.DDMMYYYY_HHMMSS );
 	}
 	
 	@Test
@@ -61,8 +64,8 @@ public class LogParserTest {
 		try{
 			//Cria partida
 			Long idPartida = 55667788L;
-			Date dataInicioPartida = this.simpleDateFormat.parse("23/04/2013 15:34:22");
-			Date dataFimPartida = this.simpleDateFormat.parse("14/02/2014 15:59:04");
+			Date dataInicioPartida = getData("23/04/2013 15:34:22");
+			Date dataFimPartida = getData("14/02/2014 15:59:04");
 			Set<Assassinato> assassinatos = new HashSet<Assassinato>();
 			assassinatos.add( new Assassinato( getData("23/04/2013 15:36:04"), rafel, pedro, ak47) );
 			assassinatos.add( new Assassinato( getData("23/04/2013 15:36:33"), pedro, rafel, m16) );
@@ -118,6 +121,6 @@ public class LogParserTest {
 	}
 	
 	public Date getData(String data) throws ParseException{
-		return this.simpleDateFormat.parse(data);
+		return this.dateAdapter.getData(data);
 	}
 }

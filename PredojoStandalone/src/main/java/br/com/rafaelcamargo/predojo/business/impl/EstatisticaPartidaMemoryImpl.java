@@ -1,6 +1,5 @@
 package br.com.rafaelcamargo.predojo.business.impl;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -11,9 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.joda.time.DateTime;
-import org.joda.time.Seconds;
-
 import lombok.EqualsAndHashCode;
 import br.com.rafaelcamargo.predojo.business.EstatisticaPartida;
 import br.com.rafaelcamargo.predojo.business.comparator.AssassinatoComparator;
@@ -22,6 +18,7 @@ import br.com.rafaelcamargo.predojo.domain.Assassinato;
 import br.com.rafaelcamargo.predojo.domain.HistoricoSequenciaAssassinatosConsecutivos;
 import br.com.rafaelcamargo.predojo.domain.Jogador;
 import br.com.rafaelcamargo.predojo.domain.Partida;
+import br.com.rafaelcamargo.predojo.util.DateAdapter;
 
 @EqualsAndHashCode(of={"partida"}, callSuper=false)
 public class EstatisticaPartidaMemoryImpl implements EstatisticaPartida{
@@ -41,6 +38,8 @@ public class EstatisticaPartidaMemoryImpl implements EstatisticaPartida{
 	
 	private Map<Jogador, Integer> sequenciaAssassinatos = new HashMap<Jogador, Integer>();
 	private List<HistoricoSequenciaAssassinatosConsecutivos> historicoSequenciaAssassinato = new ArrayList<HistoricoSequenciaAssassinatosConsecutivos>();
+
+	private DateAdapter dateAdapter = new DateAdapter( DateAdapter.DDMMYYYY_HHMMSS );
 	
 	public EstatisticaPartidaMemoryImpl(Partida partida){
 		this.partida = partida;
@@ -133,12 +132,9 @@ public class EstatisticaPartidaMemoryImpl implements EstatisticaPartida{
 			int index = assassinatosJogador.size() - 5;
 			Date dataHistorico = assassinatosJogador.get(index).getData();
 			Date dataAtual = assassinato.getData();
-
-			DateTime dataInicial = new DateTime(dataHistorico);
-			DateTime dataFinal = new DateTime(dataAtual);
 			
-			BigDecimal segundos = new BigDecimal(Seconds.secondsBetween(dataInicial, dataFinal).getSeconds());
-			if(segundos.intValue() <= 60){
+			int segundos = this.dateAdapter.getDiferencaEmSegundos(dataHistorico, dataAtual);
+			if(segundos <= 60){
 				adicionarPremioAoJogador(assassino);
 			}
 		}

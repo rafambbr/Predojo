@@ -11,11 +11,11 @@ public enum TipoLinha {
 	MUNDO_MATA_JOGADOR("^([\\w/]+\\s[\\w:]+) (-) (<WORLD>) (killed) ([\\w]+) (by) ([\\w]+)"),
 	FIM_PARTIDA("^([\\w/]+\\s[\\w:]+) (-) (Match) ([0-9]{5,20}) (has ended)");
 	
-//	@Getter private String grupoRegex;
+	@Getter private String grupoRegex;
 	@Getter private Pattern pattern;
 	
-	private TipoLinha(String regex){
-//		this.grupoRegex = regex;
-		this.pattern = Pattern.compile( regex, Pattern.CASE_INSENSITIVE );
+	private TipoLinha(String grupoRegex){
+		this.grupoRegex = grupoRegex;
+		this.pattern = Pattern.compile( grupoRegex, Pattern.CASE_INSENSITIVE );
 	}
 }

@@ -18,5 +18,9 @@ public @Data class Arma implements CommonDomain{
 	public Arma(String nome){
 		this.nome = nome;
 	}
-	
+
+	@Override
+	public String toString() {
+		return this.nome;
+	}
 }

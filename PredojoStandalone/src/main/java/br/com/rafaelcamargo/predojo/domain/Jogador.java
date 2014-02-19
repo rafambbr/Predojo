@@ -17,4 +17,9 @@ public @Data class Jogador implements CommonDomain{
 	public Jogador(String nome){
 		this.nome = nome;
 	}
+	
+	@Override
+	public String toString() {
+		return this.nome;
+	}
 }

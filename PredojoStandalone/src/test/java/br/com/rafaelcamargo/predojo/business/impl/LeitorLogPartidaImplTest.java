@@ -2,6 +2,7 @@ package br.com.rafaelcamargo.predojo.business.impl;
 
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -12,7 +13,6 @@ import java.util.Set;
 import org.junit.Test;
 
 import br.com.rafaelcamargo.predojo.business.LeitorLog;
-import br.com.rafaelcamargo.predojo.business.impl.LeitorLogPartidaImpl;
 import br.com.rafaelcamargo.predojo.domain.Partida;
 
 
@@ -22,7 +22,12 @@ public class LeitorLogPartidaImplTest {
 	public void analisaArquivoComDuasPartidas(){
 		try {
 			
-			URL resource = getClass().getResource("/partida_jogo_02.log");
+			String arquivo = "/partida_jogo_02.log";
+			
+			assertNotNull("Teste arquivo faltando", 
+		               getClass().getResource(arquivo));
+			
+			URL resource = getClass().getResource(arquivo);
 			File logFile = new File(resource.getFile());
 			LeitorLog<Partida> leitorLog = new LeitorLogPartidaImpl(logFile);
 			
@@ -44,7 +49,12 @@ public class LeitorLogPartidaImplTest {
 	public void analisaArquivoComUmaPartida(){
 		try {
 			
-			URL resource = getClass().getResource("/partida_jogo.log");
+			String arquivo = "/partida_jogo.log";
+			
+			assertNotNull("Teste arquivo faltando", 
+		               getClass().getResource(arquivo));
+			
+			URL resource = getClass().getResource(arquivo);
 			File logFile = new File(resource.getFile());
 			LeitorLog<Partida> leitorLog = new LeitorLogPartidaImpl(logFile);
 			
@@ -59,4 +69,5 @@ public class LeitorLogPartidaImplTest {
 			fail();
 		}
 	}
+
 }

@@ -9,10 +9,10 @@ import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
 import br.com.rafaelcamargo.predojo.business.EstatisticaPartida;
-import br.com.rafaelcamargo.predojo.business.ImprimeDados;
+import br.com.rafaelcamargo.predojo.business.ExibeDados;
 import br.com.rafaelcamargo.predojo.business.LeitorLog;
 import br.com.rafaelcamargo.predojo.business.LogParser;
-import br.com.rafaelcamargo.predojo.business.impl.ImprimeEstatisticaPartidaConsoleImpl;
+import br.com.rafaelcamargo.predojo.business.impl.ExibeDadosEstatisticaPartidaConsoleImpl;
 import br.com.rafaelcamargo.predojo.business.impl.LeitorLogPartidaImpl;
 import br.com.rafaelcamargo.predojo.business.impl.PartidaParserImpl;
 import br.com.rafaelcamargo.predojo.domain.Partida;
@@ -29,13 +29,13 @@ public class App {
 			
 	        while (true) {  
 	        	
-	        	String comando = reader.readLine().replace("\\", "/");  
+	        	String comando = reader.readLine();  
 	        	if("ajuda".equals(comando)){
 	        		imprimirMenuAjuda();
 	        	}else if("sair".equals(comando)){
 	        		break;
 	        	}else{
-	        		leArquivo(comando);
+	        		leArquivo( comando.replace("\\", "/") );
 	        	}
 	        } 
 	        
@@ -69,8 +69,8 @@ public class App {
 			LogParser<Partida, EstatisticaPartida> geraEstatisticaPartidas = new PartidaParserImpl();
 			Collection<EstatisticaPartida> estatisticasPartidas = geraEstatisticaPartidas.parse(partidasAnalisadas);
 			
-			ImprimeDados<EstatisticaPartida> imprimeEstatisticaPartida = new ImprimeEstatisticaPartidaConsoleImpl();
-			imprimeEstatisticaPartida.imprimir(estatisticasPartidas);
+			ExibeDados<EstatisticaPartida> exibeDadosEstatisticaPartida = new ExibeDadosEstatisticaPartidaConsoleImpl();
+			exibeDadosEstatisticaPartida.exibirDados(estatisticasPartidas);
 		}else{
 			System.out.println("Arquivo inválido: " + caminhoArquivo); 
 		}

@@ -68,12 +68,20 @@ public class EstatisticaPartidaMemoryImplTest {
 		assertThat(vencedoresPartida03, contains(RAFAEL, PEDRO));
 	}
 	
-//	@Test
-	public void deveGerarEstatisticasDasPartidas(){
+	public void deveGanharPremioAoMatarCincoJogadoresEmMenosDeUmMinuto(){
 		
+		EstatisticaPartida estatisticaPartida01 = new EstatisticaPartidaMemoryImpl(PARTIDA01);
+		int quantidadePremiosRafael = estatisticaPartida01.getQuantidadePremios(RAFAEL);
+		int quantidadePremiosThiago = estatisticaPartida01.getQuantidadePremios(THIAGO);
+		int quantidadePremiosPedro = estatisticaPartida01.getQuantidadePremios(PEDRO);
+		int quantidadePremiosJoao = estatisticaPartida01.getQuantidadePremios(JOAO);
+		
+		assertEquals(1, quantidadePremiosRafael);
+		assertEquals(0, quantidadePremiosThiago);
+		assertEquals(0, quantidadePremiosPedro);
+		assertEquals(0, quantidadePremiosJoao);
 	}
-
-
+	
 	private static void gerarPartidas() throws ParseException {
 		PartidaBuilder partidaBuilder = new PartidaBuilder();
 		PARTIDA01 = partidaBuilder.addInicioPartida(91348001L, "23/04/2013 15:34:22")

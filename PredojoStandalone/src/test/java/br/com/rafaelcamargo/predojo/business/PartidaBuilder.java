@@ -1,7 +1,6 @@
 package br.com.rafaelcamargo.predojo.business;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -10,6 +9,7 @@ import br.com.rafaelcamargo.predojo.domain.Arma;
 import br.com.rafaelcamargo.predojo.domain.Assassinato;
 import br.com.rafaelcamargo.predojo.domain.Jogador;
 import br.com.rafaelcamargo.predojo.domain.Partida;
+import br.com.rafaelcamargo.predojo.util.DateAdapter;
 
 /**
  * Builder
@@ -20,7 +20,7 @@ public class PartidaBuilder {
 
 	private Partida partida;
 	private final Set<Assassinato> assassinatos = new LinkedHashSet<Assassinato>();
-	public final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	public final DateAdapter dateAdapter = new DateAdapter( DateAdapter.DDMMYYYY_HHMMSS );
 	
 	public PartidaBuilder addInicioPartida(Long idPartida, Date dataInicio){
 		this.partida = new Partida(idPartida, dataInicio);
@@ -28,13 +28,13 @@ public class PartidaBuilder {
 	}
 	
 	public PartidaBuilder addInicioPartida(Long idPartida, String dataInicio) throws ParseException{
-		Date dataInicioPartida = this.simpleDateFormat.parse(dataInicio);		
+		Date dataInicioPartida = this.dateAdapter.getData(dataInicio);		
 		this.partida = new Partida(idPartida, dataInicioPartida);
 		return this;
 	}
 	
 	public PartidaBuilder addAssassinato(String dataAssassinato, Jogador assassino, Jogador morto, Arma armaAssassino) throws ParseException{
-		Date data = this.simpleDateFormat.parse(dataAssassinato);
+		Date data = this.dateAdapter.getData(dataAssassinato);
 		return addAssassinato(data, assassino, morto, armaAssassino);
 	}
 	
@@ -45,7 +45,7 @@ public class PartidaBuilder {
 	}
 	
 	public PartidaBuilder addDataFimPartida(String dataFim) throws ParseException{
-		Date data = this.simpleDateFormat.parse(dataFim);
+		Date data = this.dateAdapter.getData(dataFim);
 		return addDataFimPartida(data);
 	}
 	
@@ -70,4 +70,6 @@ public class PartidaBuilder {
 		
 		return partida;
 	}
+	
+	
 }

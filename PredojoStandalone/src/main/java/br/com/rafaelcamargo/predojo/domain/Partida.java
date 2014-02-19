@@ -44,4 +44,9 @@ public @Data class Partida implements CommonDomain{
 		
 		return statusPartida;
 	}
+	
+	@Override
+	public String toString() {
+		return "ID: " + this.idPartida + " INICIO:" + dataInicio + " FIM:" + dataFim;
+	}
 }
