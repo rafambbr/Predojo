@@ -1,4 +1,4 @@
-package br.com.rafaelcamargo.predojo.business;
+package br.com.rafaelcamargo.predojo.business.impl;
 
 import java.text.ParseException;
 import java.util.Date;

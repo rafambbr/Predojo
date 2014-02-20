@@ -14,16 +14,16 @@ public class DateAdapter {
 		this.simpleDateFormat = new SimpleDateFormat(pattern);
 	}
 
-	public int getDiferencaEmSegundos(Date dataInicio, Date dataFim){
+	public Long getDiferencaEmSegundos(Date dataInicio, Date dataFim){
 		BigDecimal milisegundosInicio = new BigDecimal( dataInicio.getTime() );
 		BigDecimal milisegundosFim = new BigDecimal( dataFim.getTime() );
 		
-		BigDecimal diferenca = milisegundosInicio.subtract(milisegundosFim);
+		BigDecimal diferenca = milisegundosFim.subtract(milisegundosInicio);
 		BigDecimal divisor = new BigDecimal(1000);
 		
 		BigDecimal segundos = diferenca.divide( divisor ); 
 		
-		return segundos.intValue();
+		return segundos.longValue();
 	}
 	
 	public Date getData(String data) throws ParseException{

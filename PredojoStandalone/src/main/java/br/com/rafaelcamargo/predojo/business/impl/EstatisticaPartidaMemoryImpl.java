@@ -133,8 +133,8 @@ public class EstatisticaPartidaMemoryImpl implements EstatisticaPartida{
 			Date dataHistorico = assassinatosJogador.get(index).getData();
 			Date dataAtual = assassinato.getData();
 			
-			int segundos = this.dateAdapter.getDiferencaEmSegundos(dataHistorico, dataAtual);
-			if(segundos <= 60){
+			Long segundos = this.dateAdapter.getDiferencaEmSegundos(dataHistorico, dataAtual);
+			if(segundos <= 60L){
 				adicionarPremioAoJogador(assassino);
 			}
 		}

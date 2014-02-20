@@ -9,6 +9,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
+	<version>1.0-SNAPSHOT</version>
+	<groupId>br.com.rafaelcamargo.predojo</groupId>
 	<artifactId>predojo-standalone</artifactId>
 	<packaging>jar</packaging>
 	<name>PredojoStandalone</name>
@@ -133,4 +135,5 @@
 		  	
 		  </plugins>
 	</build>
+	
 </project>

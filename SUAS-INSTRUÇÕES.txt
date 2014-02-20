@@ -17,6 +17,7 @@
 * "ajuda"   - imprime menu de comandos
 * %ARQUIVO% - Deve ser informado o caminho completo do arquivo de log a ser analisado ex: "C:/minha/pasta/meu_arquivo_partida.log"
 *************************************************************************************************************************
+mvn install
 mvn exec:java -Dexec.mainClass="br.com.rafaelcamargo.predojo.application.App"
 
 
