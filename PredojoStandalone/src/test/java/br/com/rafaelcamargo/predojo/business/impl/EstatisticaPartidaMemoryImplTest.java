@@ -71,7 +71,7 @@ public class EstatisticaPartidaMemoryImplTest {
 		int quantidadePremiosPedro = estatisticaPartida01.getQuantidadePremios(PEDRO);
 		int quantidadePremiosJoao = estatisticaPartida01.getQuantidadePremios(JOAO);
 		
-		assertEquals(1, quantidadePremiosRafael);
+		assertEquals(4, quantidadePremiosRafael);
 		assertEquals(0, quantidadePremiosThiago);
 		assertEquals(0, quantidadePremiosPedro);
 		assertEquals(0, quantidadePremiosJoao);
