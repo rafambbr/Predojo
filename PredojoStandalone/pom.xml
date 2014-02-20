@@ -29,7 +29,7 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
 		
 		<!-- LOG -->
@@ -81,6 +81,20 @@
 
 	<build>
 		<finalName>predojo-standalone</finalName>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resource</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resource</directory>
+			</testResource>
+		</testResources>
+		
+		
 		<plugins>
 
 			<!-- JACOCO Plugin que verifica a corbertura de código com classes de teste (mvn package) -->
