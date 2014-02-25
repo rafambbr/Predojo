@@ -1,15 +1,15 @@
 package br.com.rafaelcamargo.predojo.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import br.com.rafaelcamargo.predojo.common.CommonDomain;
 
 @EqualsAndHashCode(of={"idPartida"}, callSuper=false)
-public @Data class Partida implements CommonDomain{
+public @Data class Partida implements Serializable{
 
 	private static final long serialVersionUID = 2015982329794446470L;
 	private Long idPartida;

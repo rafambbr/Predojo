@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import br.com.rafaelcamargo.predojo.business.LeitorLog;
 import br.com.rafaelcamargo.predojo.business.parser.LogParser;
 import br.com.rafaelcamargo.predojo.business.parser.Parser;
-import br.com.rafaelcamargo.predojo.common.CommonDomain;
 import br.com.rafaelcamargo.predojo.domain.Assassinato;
 import br.com.rafaelcamargo.predojo.domain.Partida;
 import br.com.rafaelcamargo.predojo.domain.TipoLinha;
@@ -60,7 +59,7 @@ public class LeitorLogPartidaImpl extends LeitorLog<Partida>{
 		TipoLinha tipoLinha = getTipoDaLinha(linha);
 		Parser parser = LogParser.getParser(tipoLinha);
 		
-		CommonDomain retorno = parser.parse(linha, partidaAtual);
+		Object retorno = parser.parse(linha, partidaAtual);
 		if(retorno != null){
 			if(tipoLinha == TipoLinha.INICIO_PARTIDA || tipoLinha == TipoLinha.FIM_PARTIDA){
 				partidaAtual = (Partida)retorno;

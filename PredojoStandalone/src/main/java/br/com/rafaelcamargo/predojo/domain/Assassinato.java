@@ -1,13 +1,13 @@
 package br.com.rafaelcamargo.predojo.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import br.com.rafaelcamargo.predojo.common.CommonDomain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(of={"data", "assassino", "morto"}, callSuper=false)
-public @Data class Assassinato implements CommonDomain{
+public @Data class Assassinato implements Serializable{
 
 	private static final long serialVersionUID = 7920164672591673600L;
 	private Long idAssasinato;

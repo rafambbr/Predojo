@@ -11,11 +11,11 @@ import org.junit.Test;
 
 public class DateAdapterTest {
 
-	private static DateAdapter dateAdapter;
+	private static DateUtil dateAdapter;
 	
 	@BeforeClass
 	public static void setUp(){
-		dateAdapter = new DateAdapter( DateAdapter.DDMMYYYY_HHMMSS );
+		dateAdapter = new DateUtil( DateUtil.DDMMYYYY_HHMMSS );
 	}
 	
 	@Test

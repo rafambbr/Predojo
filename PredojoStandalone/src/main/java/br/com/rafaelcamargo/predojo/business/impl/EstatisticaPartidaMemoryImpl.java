@@ -18,7 +18,7 @@ import br.com.rafaelcamargo.predojo.domain.Assassinato;
 import br.com.rafaelcamargo.predojo.domain.HistoricoSequenciaAssassinatosConsecutivos;
 import br.com.rafaelcamargo.predojo.domain.Jogador;
 import br.com.rafaelcamargo.predojo.domain.Partida;
-import br.com.rafaelcamargo.predojo.util.DateAdapter;
+import br.com.rafaelcamargo.predojo.util.DateUtil;
 
 @EqualsAndHashCode(of={"partida"}, callSuper=false)
 public class EstatisticaPartidaMemoryImpl implements EstatisticaPartida{
@@ -39,7 +39,7 @@ public class EstatisticaPartidaMemoryImpl implements EstatisticaPartida{
 	private Map<Jogador, Integer> sequenciaAssassinatos = new HashMap<Jogador, Integer>();
 	private List<HistoricoSequenciaAssassinatosConsecutivos> historicoSequenciaAssassinato = new ArrayList<HistoricoSequenciaAssassinatosConsecutivos>();
 
-	private DateAdapter dateAdapter = new DateAdapter( DateAdapter.DDMMYYYY_HHMMSS );
+	private DateUtil dateAdapter = new DateUtil( DateUtil.DDMMYYYY_HHMMSS );
 	
 	public EstatisticaPartidaMemoryImpl(Partida partida){
 		this.partida = partida;

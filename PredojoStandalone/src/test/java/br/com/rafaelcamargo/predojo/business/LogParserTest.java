@@ -24,7 +24,7 @@ import br.com.rafaelcamargo.predojo.domain.Assassinato;
 import br.com.rafaelcamargo.predojo.domain.HistoricoSequenciaAssassinatosConsecutivos;
 import br.com.rafaelcamargo.predojo.domain.Jogador;
 import br.com.rafaelcamargo.predojo.domain.Partida;
-import br.com.rafaelcamargo.predojo.util.DateAdapter;
+import br.com.rafaelcamargo.predojo.util.DateUtil;
 
 public class LogParserTest {
 
@@ -38,7 +38,7 @@ public class LogParserTest {
 	private Arma ak47 = new Arma("AK46");
 	private Arma drown = new Arma("DROWN");
 	
-	private DateAdapter dateAdapter;
+	private DateUtil dateAdapter;
 	
 	@Before
 	public void setUp(){
@@ -56,7 +56,7 @@ public class LogParserTest {
 		this.ak47 = new Arma("AK46");
 		this.drown = new Arma("DROWN");
 		
-		this.dateAdapter = new DateAdapter( DateAdapter.DDMMYYYY_HHMMSS );
+		this.dateAdapter = new DateUtil( DateUtil.DDMMYYYY_HHMMSS );
 	}
 	
 	@Test

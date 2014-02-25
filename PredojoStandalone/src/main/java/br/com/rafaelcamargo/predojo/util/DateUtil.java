@@ -5,12 +5,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateAdapter {
+public class DateUtil {
 	
 	public static final String DDMMYYYY_HHMMSS = "dd/MM/yyyy HH:mm:ss";
 	private SimpleDateFormat simpleDateFormat;
 	
-	public DateAdapter(String pattern){
+	public DateUtil(String pattern){
 		this.simpleDateFormat = new SimpleDateFormat(pattern);
 	}
 

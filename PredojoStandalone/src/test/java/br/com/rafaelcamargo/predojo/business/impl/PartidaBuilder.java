@@ -9,7 +9,7 @@ import br.com.rafaelcamargo.predojo.domain.Arma;
 import br.com.rafaelcamargo.predojo.domain.Assassinato;
 import br.com.rafaelcamargo.predojo.domain.Jogador;
 import br.com.rafaelcamargo.predojo.domain.Partida;
-import br.com.rafaelcamargo.predojo.util.DateAdapter;
+import br.com.rafaelcamargo.predojo.util.DateUtil;
 
 /**
  * Builder
@@ -20,7 +20,7 @@ public class PartidaBuilder {
 
 	private Partida partida;
 	private final Set<Assassinato> assassinatos = new LinkedHashSet<Assassinato>();
-	public final DateAdapter dateAdapter = new DateAdapter( DateAdapter.DDMMYYYY_HHMMSS );
+	public final DateUtil dateAdapter = new DateUtil( DateUtil.DDMMYYYY_HHMMSS );
 	
 	public PartidaBuilder addInicioPartida(Long idPartida, Date dataInicio){
 		this.partida = new Partida(idPartida, dataInicio);

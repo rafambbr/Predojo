@@ -1,12 +1,13 @@
 package br.com.rafaelcamargo.predojo.domain;
 
-import br.com.rafaelcamargo.predojo.common.CommonDomain;
+import java.io.Serializable;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 
 @EqualsAndHashCode(of={"nome"}, callSuper=false)
-public @Data class Arma implements CommonDomain{
+public @Data class Arma implements Serializable{
 
 	private static final long serialVersionUID = 6732868267302893147L;
 	private String nome;
