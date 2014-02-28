@@ -21,7 +21,7 @@ public class InicioPartidaParser extends Parser<Partida> implements LogPartidaCo
 			Pattern p = TipoLinha.INICIO_PARTIDA.getPattern();
 			Matcher m = p.matcher(linha);
 			if(m.find()) {
-				Date dataInicioPartida = dateAdapter.getData( m.group(1) ); 
+				Date dataInicioPartida = dateUtil.getData( m.group(1) ); 
 				//String separador = m.group(2);
 				//String informacaoNovaPartida = m.group(3);
 				Long idPartida = Long.parseLong( m.group(4) );

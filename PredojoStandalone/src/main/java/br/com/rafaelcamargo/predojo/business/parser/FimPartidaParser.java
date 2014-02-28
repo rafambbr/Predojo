@@ -18,7 +18,7 @@ public class FimPartidaParser extends Parser<Partida> implements LogPartidaCommo
 			Pattern p = TipoLinha.FIM_PARTIDA.getPattern();
 			Matcher m = p.matcher(linha);
 			if(m.find()) {
-				Date dataFimPartida = dateAdapter.getData( m.group(1) );
+				Date dataFimPartida = dateUtil.getData( m.group(1) );
 				//String separador = m.group(2);
 				//String informacaoPartida = m.group(3);
 				//Long idPartida = Long.parseLong( m.group(4) );

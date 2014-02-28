@@ -5,6 +5,6 @@ import br.com.rafaelcamargo.predojo.util.DateUtil;
 public interface LogPartidaCommon {
 	
 	public final String LINHA_INVALIDA = "Linha inválida";
-	public final DateUtil dateAdapter = new DateUtil( DateUtil.DDMMYYYY_HHMMSS );
+	public final DateUtil dateUtil = new DateUtil( DateUtil.DDMMYYYY_HHMMSS );
 	
 }

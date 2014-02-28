@@ -20,7 +20,7 @@ public class PartidaBuilder {
 
 	private Partida partida;
 	private final Set<Assassinato> assassinatos = new LinkedHashSet<Assassinato>();
-	public final DateUtil dateAdapter = new DateUtil( DateUtil.DDMMYYYY_HHMMSS );
+	public final DateUtil dateUtil = new DateUtil( DateUtil.DDMMYYYY_HHMMSS );
 	
 	public PartidaBuilder addInicioPartida(Long idPartida, Date dataInicio){
 		this.partida = new Partida(idPartida, dataInicio);
@@ -28,13 +28,13 @@ public class PartidaBuilder {
 	}
 	
 	public PartidaBuilder addInicioPartida(Long idPartida, String dataInicio) throws ParseException{
-		Date dataInicioPartida = this.dateAdapter.getData(dataInicio);		
+		Date dataInicioPartida = this.dateUtil.getData(dataInicio);		
 		this.partida = new Partida(idPartida, dataInicioPartida);
 		return this;
 	}
 	
 	public PartidaBuilder addAssassinato(String dataAssassinato, Jogador assassino, Jogador morto, Arma armaAssassino) throws ParseException{
-		Date data = this.dateAdapter.getData(dataAssassinato);
+		Date data = this.dateUtil.getData(dataAssassinato);
 		return addAssassinato(data, assassino, morto, armaAssassino);
 	}
 	
@@ -45,7 +45,7 @@ public class PartidaBuilder {
 	}
 	
 	public PartidaBuilder addDataFimPartida(String dataFim) throws ParseException{
-		Date data = this.dateAdapter.getData(dataFim);
+		Date data = this.dateUtil.getData(dataFim);
 		return addDataFimPartida(data);
 	}
 	

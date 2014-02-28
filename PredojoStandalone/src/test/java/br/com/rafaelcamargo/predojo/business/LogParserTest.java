@@ -38,7 +38,7 @@ public class LogParserTest {
 	private Arma ak47 = new Arma("AK46");
 	private Arma drown = new Arma("DROWN");
 	
-	private DateUtil dateAdapter;
+	private DateUtil dateUtil;
 	
 	@Before
 	public void setUp(){
@@ -56,7 +56,7 @@ public class LogParserTest {
 		this.ak47 = new Arma("AK46");
 		this.drown = new Arma("DROWN");
 		
-		this.dateAdapter = new DateUtil( DateUtil.DDMMYYYY_HHMMSS );
+		this.dateUtil = new DateUtil( DateUtil.DDMMYYYY_HHMMSS );
 	}
 	
 	@Test
@@ -121,6 +121,6 @@ public class LogParserTest {
 	}
 	
 	public Date getData(String data) throws ParseException{
-		return this.dateAdapter.getData(data);
+		return this.dateUtil.getData(data);
 	}
 }

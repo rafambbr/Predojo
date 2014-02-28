@@ -23,7 +23,7 @@ public class JogadorMataJogadorParser extends Parser<Assassinato> implements Log
 			Pattern p = TipoLinha.JOGADOR_MATA_JOGADOR.getPattern();
 			Matcher m = p.matcher(linha);
 			if( m.find() ) {
-				Date data = dateAdapter.getData( m.group(1) ); 
+				Date data = dateUtil.getData( m.group(1) ); 
 				//String separador = m.group(2);
 				Jogador jogadorAssasino = new Jogador( m.group(3) );
 				//String informacaoMatou = m.group(4);

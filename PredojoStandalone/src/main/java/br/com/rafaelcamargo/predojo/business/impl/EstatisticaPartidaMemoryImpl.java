@@ -39,7 +39,7 @@ public class EstatisticaPartidaMemoryImpl implements EstatisticaPartida{
 	private Map<Jogador, Integer> sequenciaAssassinatos = new HashMap<Jogador, Integer>();
 	private List<HistoricoSequenciaAssassinatosConsecutivos> historicoSequenciaAssassinato = new ArrayList<HistoricoSequenciaAssassinatosConsecutivos>();
 
-	private DateUtil dateAdapter = new DateUtil( DateUtil.DDMMYYYY_HHMMSS );
+	private DateUtil dateUtil = new DateUtil( DateUtil.DDMMYYYY_HHMMSS );
 	
 	public EstatisticaPartidaMemoryImpl(Partida partida){
 		this.partida = partida;
@@ -133,7 +133,7 @@ public class EstatisticaPartidaMemoryImpl implements EstatisticaPartida{
 			Date dataHistorico = assassinatosJogador.get(index).getData();
 			Date dataAtual = assassinato.getData();
 			
-			Long segundos = this.dateAdapter.getDiferencaEmSegundos(dataHistorico, dataAtual);
+			Long segundos = this.dateUtil.getDiferencaEmSegundos(dataHistorico, dataAtual);
 			if(segundos <= 60L){
 				adicionarPremioAoJogador(assassino);
 			}
