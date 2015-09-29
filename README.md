@@ -11,31 +11,32 @@ Resultado esperado
 ------------------
 * Montar o ranking de cada partida, com a quantidade assassinatos e a quantidade de mortes de cada jogador;
 
-Observações
+
+ObservaÃ§Ãµes
 ------------
 * Assassinatos realizados pelo player &lt;WORLD&gt; devem ser desconsiderados.
 
 
-Bônus
+BÃ´nus
 -----
-Não obrigatório. Faça apenas caso se identifique com o problema ou se achar que há algo interessante a ser mostrado na solução
+NÃ£o obrigatÃ³rio. FaÃ§a apenas caso se identifique com o problema ou se achar que hÃ¡ algo interessante a ser mostrado na soluÃ§Ã£o
 * Descobrir a arma preferida (a que mais matou) do vencedor;
-* Identificar a maior sequência de assassinatos efetuadas por um jogador (streak) sem morrer, dentro da partida;
+* Identificar a maior sequÃªncia de assassinatos efetuadas por um jogador (streak) sem morrer, dentro da partida;
 * Jogadores que vencerem uma partida sem morrerem devem ganhar um "award";
 * Jogadores que matarem 5 vezes em 1 minuto devem ganhar um "award".
 
 
-SOLUÇÃO
+SOLUÃ‡ÃƒO
 =======
 * Seja criativo;
-* Explore ao máximo a orientação a objetos;
-* Crie testes unitários e tente usar TDD;
-* Não é necessário utilizar nenhum framework, mas fica ao seu critério;
-* Caso você tenha baixado o arquivo zip, o projeto já contém um repositório git inicializado. Se você nunca usou git desconsidere isso. 
+* Explore ao mÃ¡ximo a orientaÃ§Ã£o a objetos;
+* Crie testes unitÃ¡rios e tente usar TDD;
+* NÃ£o Ã© necessÃ¡rio utilizar nenhum framework, mas fica ao seu critÃ©rio;
+* Caso vocÃª tenha baixado o arquivo zip, o projeto jÃ¡ contÃ©m um repositÃ³rio git inicializado. Se vocÃª nunca usou git desconsidere isso. 
 
 ENTREGA
 =======
-* Caso tenha feito um fork do nosso repositório, nos envie a url do seu repositório com a solução;
+* Caso tenha feito um fork do nosso repositÃ³rio, nos envie a url do seu repositÃ³rio com a soluÃ§Ã£o;
 * Caso tenha baixado o arquivo zip, nos envie este mesmo projeto em formato compactado, com os seus fontes;
-* Se você usar o controlador de versões git, enviar a pasta .git junto com o projeto compactado;
-* Utilize o arquivo SUAS-INSTRUÇÕES.txt para adicionar algum comentário/observação que achar importante.
+* Se vocÃª usar o controlador de versÃµes git, enviar a pasta .git junto com o projeto compactado;
+* Utilize o arquivo SUAS-INSTRUÃ‡Ã•ES.txt para adicionar algum comentÃ¡rio/observaÃ§Ã£o que achar importante.
